@@ -36,7 +36,7 @@ class m200118_100816_create_Drink_table extends Migration
 
         // add foreign key for table `category`
         $this->addForeignKey(
-            'fk-Driink-typeId',
+            'fk-Drink-typeId',
             'Drink',
             'typeId',
             'type',
