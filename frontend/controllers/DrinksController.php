@@ -11,7 +11,7 @@ use yii\web\Controller;
 
 class DrinksController extends BaseApiController
 {
-    public $modelClass=PostAPI::class;
+    public $modelClass='common\models\Drink';
 
     /*public function actionShow(){
         $model = new PostsShow();
