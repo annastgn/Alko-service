@@ -29,7 +29,7 @@ class m200118_100816_create_Drink_table extends Migration
             'fk-Drink-producerId',
             'Drink',
             'producerId',
-            'Producer',
+            'producer',
             'id',
             'CASCADE'
         );
@@ -39,7 +39,7 @@ class m200118_100816_create_Drink_table extends Migration
             'fk-Driink-typeId',
             'Drink',
             'typeId',
-            'TypeDrink',
+            'type',
             'id',
             'CASCADE'
         );

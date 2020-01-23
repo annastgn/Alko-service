@@ -23,7 +23,7 @@ class m200118_102802_create_Comment_table extends Migration
         // add foreign key for table `user`
         $this->addForeignKey(
             'fk-Comment-userId',
-            'Comment',
+            'Comпment',
             'userId',
             'User',
             'id',
