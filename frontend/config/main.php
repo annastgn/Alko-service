@@ -42,7 +42,12 @@ return [
             'enableStrictParsing' => true,
             'showScriptName' => false,
             'rules' => [
-                ['class' => 'yii\rest\UrlRule', 'controller' => 'drink'],
+                '<controller:\w+>/<action:\w+>/<id:\w+>' => '<controller>/<action>',
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => ['drinks'],
+                    'pluralize' => false,
+                ],
             ],
         ],
 

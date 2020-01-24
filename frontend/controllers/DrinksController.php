@@ -3,7 +3,9 @@
 
 namespace frontend\controllers;
 
+use common\models\Drink;
 use frontend\controllers\BaseApiController;
+use frontend\models\DrinkAPI;
 use yii\data\ArrayDataProvider;
 use yii\rest\ActiveController;
 use yii\web\Response;
@@ -11,7 +13,7 @@ use yii\web\Controller;
 
 class DrinksController extends BaseApiController
 {
-    public $modelClass='common\models\Drink';
+    public $modelClass= DrinkAPI::class;
 
     /*public function actionShow(){
         $model = new PostsShow();
