@@ -3,18 +3,18 @@
 use yii\db\Migration;
 
 /**
- * Handles the creation of table `{{%Brand}}`.
+ * Handles the creation of table `{{%volume}}`.
  */
-class m200128_055016_create_Brand_table extends Migration
+class m200128_082201_create_volume_table extends Migration
 {
     /**
      * {@inheritdoc}
      */
     public function safeUp()
     {
-        $this->createTable('{{%Brand}}', [
+        $this->createTable('{{%volume}}', [
             'id' => $this->primaryKey(),
-            'name' => $this->string(),
+            'volume' => $this->double(),
         ]);
     }
 
@@ -23,6 +23,6 @@ class m200128_055016_create_Brand_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable('{{%Brand}}');
+        $this->dropTable('{{%volume}}');
     }
 }

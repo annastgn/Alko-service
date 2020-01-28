@@ -8,16 +8,10 @@ use Yii;
  * This is the model class for table "shop".
  *
  * @property int $id
- * @property string|null $address
- * @property string|null $name
- * @property int|null $scheduleSince
- * @property int|null $scheduleTill
- * @property string|null $availability
- * @property float|null $priceMin
- * @property float|null $priceMax
- * @property int|null $drink_id
- *
- * @property DrinkShopId[] $drinkShops
+ * @property string $name
+ * @property string $address
+ * @property string|null $scheduleSince
+ * @property string|null $scheduleTill
  */
 class Shop extends \yii\db\ActiveRecord
 {
@@ -35,11 +29,9 @@ class Shop extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['scheduleSince', 'scheduleTill', 'drink_id'], 'default', 'value' => null],
-            [['scheduleSince', 'scheduleTill', 'drink_id'], 'integer'],
-            [['priceMin', 'priceMax'], 'number'],
-            [['address'], 'string', 'max' => 255],
-            [['name', 'availability'], 'string', 'max' => 300],
+            [['name', 'address'], 'required'],
+            [['scheduleSince', 'scheduleTill'], 'safe'],
+            [['name', 'address'], 'string', 'max' => 255],
         ];
     }
 
@@ -50,24 +42,10 @@ class Shop extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'address' => 'Address',
             'name' => 'Name',
+            'address' => 'Address',
             'scheduleSince' => 'Schedule Since',
             'scheduleTill' => 'Schedule Till',
-            'availability' => 'Availability',
-            'priceMin' => 'Price Min',
-            'priceMax' => 'Price Max',
-            'drink_id' => 'Drink ID',
         ];
-    }
-
-    /**
-     * Gets query for [[DrinkShops]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getDrinkShops()
-    {
-        return $this->hasMany(DrinkShopId::className(), ['shop_id' => 'id']);
     }
 }

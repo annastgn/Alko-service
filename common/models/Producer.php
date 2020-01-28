@@ -8,10 +8,10 @@ use Yii;
  * This is the model class for table "producer".
  *
  * @property int $id
- * @property string|null $country
- * @property string|null $brand
+ * @property string $name
+ * @property string $country
  *
- * @property Drink[] $drinks
+ * @property Brand[] $brands
  */
 class Producer extends \yii\db\ActiveRecord
 {
@@ -29,8 +29,9 @@ class Producer extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['country'], 'string', 'max' => 100],
-            [['brand'], 'string', 'max' => 300],
+            [['name', 'country'], 'required'],
+            [['name', 'country'], 'string', 'max' => 255],
+            [['name'], 'unique'],
         ];
     }
 
@@ -41,18 +42,18 @@ class Producer extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'name' => 'Name',
             'country' => 'Country',
-            'brand' => 'Brand',
         ];
     }
 
     /**
-     * Gets query for [[Drinks]].
+     * Gets query for [[Brands]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getDrinks()
+    public function getBrands()
     {
-        return $this->hasMany(Drink::className(), ['producerId' => 'id']);
+        return $this->hasMany(Brand::className(), ['producerId' => 'id']);
     }
 }

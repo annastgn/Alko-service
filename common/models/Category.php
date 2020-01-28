@@ -5,22 +5,19 @@ namespace common\models;
 use Yii;
 
 /**
- * This is the model class for table "drink".
+ * This is the model class for table "category".
  *
  * @property int $id
  * @property string $name
- * @property float|null $minCost
- * @property float|null $maxCost
- * @property string|null $image
  */
-class Drink extends \yii\db\ActiveRecord
+class Category extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'drink';
+        return 'category';
     }
 
     /**
@@ -30,8 +27,7 @@ class Drink extends \yii\db\ActiveRecord
     {
         return [
             [['name'], 'required'],
-            [['minCost', 'maxCost'], 'number'],
-            [['name', 'image'], 'string', 'max' => 255],
+            [['name'], 'string', 'max' => 255],
             [['name'], 'unique'],
         ];
     }
@@ -44,9 +40,6 @@ class Drink extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Name',
-            'minCost' => 'Min Cost',
-            'maxCost' => 'Max Cost',
-            'image' => 'Image',
         ];
     }
 }
