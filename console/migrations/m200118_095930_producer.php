@@ -15,10 +15,17 @@ class m200118_095930_producer extends Migration
         $this->createTable('producer', [
             'id' => $this->primaryKey(),
             'country' => $this->string(100),
-            'brand' => $this->string(300),
+            'brandId' => $this->integer(),
         ]);
 
-
+        $this->addForeignKey(
+            'fk-producer-brandId',
+            'producer',
+            'brandId',
+            'Brand',
+            'id',
+            'CASCADE'
+        );
     }
 
 
