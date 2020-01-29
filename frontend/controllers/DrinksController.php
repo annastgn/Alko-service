@@ -4,28 +4,37 @@
 namespace frontend\controllers;
 
 use common\models\Drink;
-use frontend\controllers\BaseApiController;
 use frontend\models\DrinkAPI;
 use yii\data\ArrayDataProvider;
+use yii\filters\ContentNegotiator;
 use yii\rest\ActiveController;
 use yii\web\Response;
 use yii\web\Controller;
 
-class DrinksController extends BaseApiController
+class DrinksController extends ActiveController
 {
     public $modelClass= DrinkAPI::class;
 
-    /*public function actionShow(){
-        $model = new PostsShow();
-        $data = $model->show();
+    public $serializer = [
+        'class' => 'yii\rest\Serializer',
+        'collectionEnvelope' => 'items',
+    ];
 
-        var_dump($data);
-       // return $this->render('show',['model'=>$data]);
-    }*/
+    public function checkAccess($action, $model=null, $params=[]){
+        return true;
+    }
 
-//    public function actionShowOne(){
-//        $data = $model->show();
-//
-//        return $this->render('index',['model'=>$data]);
-//    }
+    public function behaviors()
+    {
+        return [
+            'contentNegotiator' => [
+                'class' => ContentNegotiator::class,
+                'formatParam' => 'format',
+                'formats' => [
+                    'application/json' => Response::FORMAT_JSON,
+                    'xml' => Response::FORMAT_XML
+                ]
+            ]
+        ];
+    }
 }
