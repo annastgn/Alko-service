@@ -51,11 +51,11 @@ return [
                 '<controller:\w+>/<action:\w+>/<id:\w+>' => '<controller>/<action>',
                 [
                     'class' => 'yii\rest\UrlRule',
-                    'controller' => ['drinks'],
+                    'controller' => ['drink'],
                     'extraPatterns' => [
                         'GET search' => 'search',
                     ],
-                    'pluralize' => false,
+                    'pluralize' => true,
                 ],
             ],
         ],

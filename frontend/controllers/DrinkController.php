@@ -4,8 +4,9 @@
 namespace frontend\controllers;
 
 use common\models\Drink;
+use frontend\models\SearchDrinks;
 use Yii;
-use frontend\models\CatalogDrinksAPI;
+use frontend\models\CatalogDrinks;
 use yii\data\ActiveDataProvider;
 use yii\data\ArrayDataProvider;
 use yii\filters\ContentNegotiator;
@@ -13,9 +14,9 @@ use yii\rest\ActiveController;
 use yii\web\Response;
 use yii\web\Controller;
 
-class DrinksController extends ActiveController
+class DrinkController extends ActiveController
 {
-    public $modelClass= CatalogDrinksAPI::class;
+    public $modelClass= CatalogDrinks::class;
 
     public $serializer = [
         'class' => 'yii\rest\Serializer',
@@ -35,4 +36,18 @@ class DrinksController extends ActiveController
             ]
         ];
     }
+
+    public function actions()
+    {
+        $actions = parent::actions();
+        $actions['index']['prepareDataProvider'] = [$this, 'prepareDataProvider'];
+        return $actions;
+    }
+
+    public function prepareDataProvider()
+    {
+        $searchModel=new SearchDrinks();
+        return $searchModel->search(Yii::$app->request->queryParams);
+    }
+
 }

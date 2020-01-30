@@ -4,7 +4,7 @@ namespace frontend\models;
 
 use common\models\Drink;
 
-class CatalogDrinksAPI extends Drink
+class CatalogDrinks extends Drink
 {
     public function fields()
     {
