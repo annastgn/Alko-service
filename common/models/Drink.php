@@ -12,6 +12,7 @@ use Yii;
  * @property float|null $minCost
  * @property float|null $maxCost
  * @property string|null $image
+ * @property string $taste
  */
 class Drink extends \yii\db\ActiveRecord
 {
@@ -31,8 +32,9 @@ class Drink extends \yii\db\ActiveRecord
         return [
             [['name'], 'required'],
             [['minCost', 'maxCost'], 'number'],
-            [['name', 'image'], 'string', 'max' => 255],
+            [['name', 'image', 'taste'], 'string', 'max' => 255],
             [['name'], 'unique'],
+            [['taste'], 'required'],
         ];
     }
 
@@ -47,6 +49,7 @@ class Drink extends \yii\db\ActiveRecord
             'minCost' => 'Min Cost',
             'maxCost' => 'Max Cost',
             'image' => 'Image',
+            'taste' => 'Taste',
         ];
     }
 }

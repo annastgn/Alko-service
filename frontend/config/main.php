@@ -14,7 +14,10 @@ return [
     'components' => [
         'request' => [
             'parsers' => [
-                'application/json' => 'yii\web\JsonParser',
+                'application/json' => [
+                    'class'=>\yii\web\JsonParser::class,
+                    'asArray'=>true,
+                    ],
             ],
             'csrfParam' => '_csrf-frontend',
         ],
@@ -49,6 +52,9 @@ return [
                 [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => ['drinks'],
+                    'extraPatterns' => [
+                        'GET search' => 'search',
+                    ],
                     'pluralize' => false,
                 ],
             ],

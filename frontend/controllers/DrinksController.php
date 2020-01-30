@@ -4,7 +4,9 @@
 namespace frontend\controllers;
 
 use common\models\Drink;
-use frontend\models\DrinkAPI;
+use Yii;
+use frontend\models\CatalogDrinksAPI;
+use yii\data\ActiveDataProvider;
 use yii\data\ArrayDataProvider;
 use yii\filters\ContentNegotiator;
 use yii\rest\ActiveController;
@@ -13,16 +15,12 @@ use yii\web\Controller;
 
 class DrinksController extends ActiveController
 {
-    public $modelClass= DrinkAPI::class;
+    public $modelClass= CatalogDrinksAPI::class;
 
     public $serializer = [
         'class' => 'yii\rest\Serializer',
-        'collectionEnvelope' => 'items',
+        'collectionEnvelope' => 'drinks',
     ];
-
-    public function checkAccess($action, $model=null, $params=[]){
-        return true;
-    }
 
     public function behaviors()
     {
