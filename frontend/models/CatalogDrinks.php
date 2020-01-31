@@ -3,6 +3,8 @@
 namespace frontend\models;
 
 use common\models\Drink;
+use yii\base\Model;
+use yii\data\ActiveDataProvider;
 
 class CatalogDrinks extends Drink
 {
@@ -15,10 +17,34 @@ class CatalogDrinks extends Drink
         }];
     }
 
-    public function extraFields()
+    public function rules()
     {
-        return [
-            ''
+        return[
+            [['name'], 'string'],
         ];
+    }
+
+    public function scenarios()
+    {
+        return Model::scenarios();
+    }
+
+    public function applyFilters($filters){
+
+    }
+
+    public function search($params)
+    {
+        $query=CatalogDrinks::find();
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        if(!($this->load($params, '')&&$this->validate())){
+            return $dataProvider;
+        }
+
+        $query->andFilterWhere(['name'=>$this->name,]);
     }
 }
