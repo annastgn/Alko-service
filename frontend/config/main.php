@@ -19,7 +19,7 @@ return [
                     'asArray'=>true,
                     ],
             ],
-            'csrfParam' => '_csrf-frontend',
+            'csrfParam' => 'csrf-frontend',
         ],
         'user' => [
             'identityClass' => 'common\models\User',
@@ -52,9 +52,6 @@ return [
                 [
                     'class' => 'yii\rest\UrlRule',
                     'controller' => ['drink'],
-                    'extraPatterns' => [
-                        'GET search' => 'search',
-                    ],
                     'pluralize' => true,
                 ],
             ],

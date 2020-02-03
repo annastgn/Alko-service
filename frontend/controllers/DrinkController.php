@@ -4,13 +4,14 @@
 namespace frontend\controllers;
 
 use common\models\Drink;
-use frontend\models\SearchDrinks;
+use phpDocumentor\Reflection\Types\This;
 use Yii;
 use frontend\models\CatalogDrinks;
 use yii\data\ActiveDataProvider;
 use yii\data\ArrayDataProvider;
 use yii\filters\ContentNegotiator;
 use yii\rest\ActiveController;
+use yii\rest\IndexAction;
 use yii\web\Response;
 use yii\web\Controller;
 
@@ -39,15 +40,21 @@ class DrinkController extends ActiveController
 
     public function actions()
     {
-        $actions = parent::actions();
-        $actions['index']['prepareDataProvider'] = [$this, 'prepareDataProvider'];
-        return $actions;
-    }
+        return[
+            'index' => [
+                'class' => 'yii\rest\IndexAction',
+                'modelClass' => $this->modelClass,
+                'checkAccess' => [$this, 'checkAccess'],
+                'prepareDataProvider' =>  function(){
+                    $requestParams = Yii::$app->request->queryParams;
+                    $modelForOutput = new CatalogDrinks();
+                    $modelForOutput->filtration($modelForOutput, $requestParams);
 
-    public function prepareDataProvider()
-    {
-        $searchModel=new SearchDrinks();
-        return $searchModel->search(Yii::$app->request->queryParams);
+                    return new ActiveDataProvider([
+                        'query' => $modelForOutput,
+                    ]);
+                },
+            ]
+        ];
     }
-
 }

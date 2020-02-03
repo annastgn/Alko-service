@@ -29,22 +29,24 @@ class CatalogDrinks extends Drink
         return Model::scenarios();
     }
 
-    public function applyFilters($filters){
-
-    }
-
-    public function search($params)
+    public function filtration(&$searchModel, $params) // поиск
     {
-        $query=CatalogDrinks::find();
+        $searchModel = $searchModel->find();
 
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-        ]);
-
-        if(!($this->load($params, '')&&$this->validate())){
-            return $dataProvider;
+        if(count($params) == 0){
+            return $searchModel;
         }
 
-        $query->andFilterWhere(['name'=>$this->name,]);
+        foreach ($params as $nameParams => $userValue) {
+            if(!is_array($userValue)) {
+                $searchModel = $searchModel->orWhere(['ilike', $nameParams, $userValue]);
+            } else {
+                foreach ($userValue as $value) {
+                    $searchModel = $searchModel->orWhere(['ilike', $nameParams, $value]);
+                }
+            }
+        }
+
+        return $searchModel;
     }
 }
